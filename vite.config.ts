@@ -1,6 +1,10 @@
 import { vitePlugin as remix } from "@remix-run/dev";
+import { installGlobals } from "@remix-run/node";
 import { defineConfig } from "vite";
+import legacy from "@vitejs/plugin-legacy";
 import tsconfigPaths from "vite-tsconfig-paths";
+
+installGlobals();
 
 declare module "@remix-run/node" {
   interface Future {
@@ -9,6 +13,7 @@ declare module "@remix-run/node" {
 }
 
 export default defineConfig({
+  base: process.env.NODE_ENV === "production" ? "/remix/" : "",
   plugins: [
     remix({
       future: {
@@ -18,6 +23,9 @@ export default defineConfig({
         v3_singleFetch: true,
         v3_lazyRouteDiscovery: true,
       },
+    }),
+    legacy({
+      targets: ["defaults", "safari >= 12.1", "not IE 11"],
     }),
     tsconfigPaths(),
   ],
