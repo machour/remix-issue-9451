@@ -1,6 +1,6 @@
 # Reproduce case for Remix's issue 9451
 
-[#9451](#https://github.com/remix-run/remix/issues/9451)
+[#9451](https://github.com/remix-run/remix/issues/9451)
 
 
 ## The problem
